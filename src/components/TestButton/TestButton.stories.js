@@ -1,5 +1,6 @@
 import React from 'react';
 import { lightTheme, darkTheme } from '../../GlobalStyles/theme';
+import { GlobalStyle } from '../../GlobalStyles/globalTheme';
 import { ThemeProvider } from 'styled-components';
 
 import { TestButton } from './TestButton';
@@ -13,6 +14,7 @@ const Template = (args) => {
 
   return ( 
     <ThemeProvider theme={args.theme}> 
+      <GlobalStyle />
       <TestButton {...args} />
     </ThemeProvider>
   )

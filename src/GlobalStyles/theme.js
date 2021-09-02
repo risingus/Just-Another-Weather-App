@@ -23,6 +23,16 @@ export const lightTheme =  {
   button_icon_size_medium: '2rem',
   button_icon_size_large: '3rem',
   grouper_box_shadow: '0px 0px 5px 2px rgba(33, 150, 243, .2)',
+  title_clip_background: 'linear-gradient(219deg,'+ 
+    '#FFFFFF 19%,'+
+    'transparent 19%,transparent 20%,'+
+    '#2196f3 20%, #2196f3  39%,'+
+    'transparent 39%,transparent 40%,'+ 
+    '#FFFFFF 40%, #FFFFFF 59% ,'+
+    'transparent 59%,transparent 60%,'+ 
+    '#2196f3 60%, #2196f3 79%,'+
+    'transparent 79%, transparent 80%,'+ 
+    '#FFFFFF 80%)',
 };
 
 export const darkTheme = {
@@ -47,7 +57,17 @@ export const darkTheme = {
   button_icon_size_small: '1.5rem',
   button_icon_size_medium: '2rem',
   button_icon_size_large: '3rem',
-  grouper_border: '2px solid #e91e63'
+  grouper_border: '2px solid #e91e63',
+  title_clip_background: 'linear-gradient(219deg,'+ 
+    'white 19%,'+
+    'transparent 19%,transparent 20%,'+
+    '#e91e63 20%, #e91e63  39%,'+
+    'transparent 39%,transparent 40%,'+ 
+    'white 40%, white 59% ,'+
+    'transparent 59%,transparent 60%,'+ 
+    '#e91e63 60%, #e91e63 79%,'+
+    'transparent 79%, transparent 80%,'+ 
+    'white 80%)',
 }
 
 

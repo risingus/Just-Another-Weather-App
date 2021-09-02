@@ -1,4 +1,4 @@
-import { ThemeProvider } from "styled-components";
+import styled, { ThemeProvider } from "styled-components";
 import { GlobalStyle } from "./GlobalStyles/globalTheme.js";
 import { TestButton } from "../src/components/TestButton/TestButton.js";
 import { useState } from "react";
@@ -8,71 +8,136 @@ import { Title } from "./components/Title/Title";
 import { Grouper } from "./components/Grouper/Grouper";
 import { GrouperButton } from "./components/GrouperButton/GrouperButton.js";
 import { Loader } from "./components/Loader/Loader.js";
-import { weatherApi } from "./services/apis";
+import { weatherApi, localApi } from "./services/apis";
+import { WeatherInfo } from "./components/WeatherCard/WeatherCard.js";
+import {WeatherTitle } from './components/WeatherTitle/WeatherTItle'
+import moment from "moment";
+import {translateWeekDays} from './services/assistFunctions';
 
 function App() {
   const [isDarkTheme, setDarkTheme] = useState(true);
   const [showWeather, setShowWeather] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [weatherInfo, setWeatherInfo] = useState({
+  const [locationInfo, setLocationInfo] = useState({
     city: "",
     country: "",
-    temp: "",
-    tempMax: "",
-    tempMin: "",
-    feelsLike: "",
-    weather: "",
+    countryCode: "",
   });
+  const [weatherInfo, setWeatherInfo] = useState([]);
 
   function handleTheme() {
     setDarkTheme(!isDarkTheme);
   }
 
-  async function getWeather(lat, lon) {
-    setIsLoading(true)
+  async function getData(lat, lon) {
+    setIsLoading(true);
 
-    await weatherApi
-      .get(`weather?lat=${lat}&lon=${lon}&appid=${process.env.REACT_APP_WEATHER_API_KEY}&units=metric&lang=en_us`)
-      .then(async ({ data }) => {
-        setWeatherInfo({
-          city: data.name,
-          country: data.sys.country,
-          temp: data.main.temp,
-          tempMax: data.main.temp_max,
-          tempMin: data.main.temp_min,
-          feelsLike: data.main.feels_like,
-          weather: `https://openweathermap.org/img/w/${data.weather[0].icon}.png`,
-        });
+    try {
+      const weather = await getWeather(lat, lon)
+      const location = await getLocation(lat, lon)
+        setWeatherInfo(weather)
+        setLocationInfo(location)
+  
+      setTimeout(() => {
+        setShowWeather(true);
+        setIsLoading(false);
+      }, 1000);
+    } catch {
+      console.log('aqui')
+    }
+  }
 
-        setTimeout(() => {
-          setShowWeather(true);
-          setIsLoading(false);
-        }, 1000);
-      });
+  const getLocation = async (lat, lon) => {
+    const response = await localApi.get(`reverse.php?key=${process.env.REACT_APP_LOCATION_IQ_API_KEY}&lat=${lat}&lon=${lon}&format=json`)
+      const {city, country, country_code} = response.data.address;
+      const countryCodeUpperCase = country_code.charAt(0).toUpperCase() + country_code.slice(1)
+      return {
+        city, country, countryCode: countryCodeUpperCase
+      }
+  }
+
+  const getWeather = async (lat, lon) => {
+    const response = await weatherApi
+    .get(`onecall?lat=${lat}&lon=${lon}&exclude=hourly,minutely&units=metric&cnt=1&appid=${process.env.REACT_APP_WEATHER_API_KEY}`)
+
+      const {current, daily} = response.data
+      daily.pop()
+
+      const reducedDaily = daily.map((day) => ({
+        temp: day.temp,
+        weather: day.weather
+      }))
+
+      
+      const today = translateWeekDays(moment().weekday())
+
+      current.temp = Math.floor(current.temp)
+      current.today = today
+      current.todayNumber = moment().weekday()
+      
+      return {current, reducedDaily};
   }
 
   function handleSucess(location) {
     const lat = location.coords.latitude;
     const lon = location.coords.longitude;
-    getWeather(lat, lon);
+    getData(lat, lon);
   }
 
   async function handleWeatherLocation() {
     await navigator.geolocation.getCurrentPosition(handleSucess);
   }
 
+  const GlobalDiv = styled.div`
+    display: flex;
+    justify-content: space-evenly;
+    margin-top: 2rem;
+
+    @media (max-width: 840px) {
+      flex-direction: column;
+      gap: 2rem;
+    }
+  `;
+
+  const WeatherDiv = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3rem;
+  `;
+
   return (
     <ThemeProvider theme={isDarkTheme ? darkTheme : lightTheme}>
       <GlobalStyle />
-      <Grouper>
-        <Title>Um teste aqui</Title>
-        <SwitchButton onClick={handleTheme} isDarkTheme={isDarkTheme} />
-      </Grouper>
 
+      <GlobalDiv>
+
+      <Grouper>
+        <SwitchButton onClick={handleTheme} isDarkTheme={isDarkTheme} $size="large" />
+        <Title>Just another weather app</Title>
+      </Grouper>
+      
+      <WeatherDiv>
+      <WeatherTitle>Find your weather</WeatherTitle>
       <GrouperButton>
         <TestButton onClick={handleWeatherLocation}>Your weather</TestButton>
         <TestButton onClick={handleTheme}>Find Weather</TestButton>
       </GrouperButton>
+
+      {(showWeather && isLoading === false) && (
+      <WeatherInfo 
+        weatherInfo={weatherInfo}
+        locationInfo={locationInfo}
+        isDarkTheme={isDarkTheme}
+      />
+      )}
+
+      </WeatherDiv>
+
+      </GlobalDiv>
+      
+
+      
 
       <Loader isLoading={isLoading} />
     </ThemeProvider>

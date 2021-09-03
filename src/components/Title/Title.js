@@ -13,6 +13,16 @@ const StyledH1 = styled.h1`
   background-clip: text;
   -webkit-background-clip: text;
   color: transparent;
+
+  ::-moz-selection {
+  color: ${({theme }) => theme.text_selection_color};
+  background: ${({theme }) => theme.text_selection_background};
+}
+
+::selection {
+  color: ${({theme }) => theme.text_selection_color};
+  background: ${({theme }) => theme.text_selection_background};
+}
 `; 
 
 

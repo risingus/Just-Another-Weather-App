@@ -10,9 +10,9 @@ export const PrimaryButton = styled(Button)`
     min-width: 6rem;
     transition: 0.2s transform;
     ${({ $size, theme }) =>
-      ($size === "small" && `font-size: ${theme.button_font_size_small}; padding: ${theme.button_padding_small};`) ||
-      ($size === "large" && `font-size: ${theme.button_font_size_large}; padding: ${theme.button_padding_large};`) ||
-      `font-size: ${theme.button_font_size_medium}; padding: ${theme.button_padding_medium};`}
+    ($size === "small" && `font-size: ${theme.button_font_size_small}; padding: ${theme.button_padding_small};`) ||
+    ($size === "large" && `font-size: ${theme.button_font_size_large}; padding: ${theme.button_padding_large};`) ||
+    `font-size: ${theme.button_font_size_medium}; padding: ${theme.button_padding_medium};`}
 
     &:hover {
       background: ${({ $buttonType, theme }) => ($buttonType === "cancel" ? theme.button_secondary_hover : theme.button_primary_hover)};
@@ -31,7 +31,7 @@ export function TestButton({ $buttonType, $size, children, onClick }) {
 PrimaryButton.propTypes = {
   $buttonType: PropTypes.string,
   $size: PropTypes.oneOf(["small", "medium", "large"]),
-  children: PropTypes.string,
+  children: PropTypes.node,
   onClick: PropTypes.func,
 };
 

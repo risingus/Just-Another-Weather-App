@@ -157,7 +157,8 @@ function App() {
       })
       .catch(() => {
         setErrorMessage("Sorry, something went wrong");
-        setIsError(false);
+        setIsLoading(false);
+        setIsError(true);
       });
   }
 

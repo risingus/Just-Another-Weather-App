@@ -26,12 +26,18 @@ const StyledModal = styled(Modal)`
     display: flex;
     justify-content: center;
     align-items: center;
+    border: none;
+    outline: none;
+    
 
     div {
       h1 {
         color: white;
         margin-top: 3rem;
         text-align: center;
+        pointer-events: none;
+        border: none;
+        outline: none;
       }
     }
   }

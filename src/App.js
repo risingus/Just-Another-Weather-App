@@ -48,7 +48,9 @@ function App() {
         setIsLoading(false);
       }, 1000);
     } catch {
-      console.log("erro");
+      setErrorMessage(`Sorry, something went wrong...`);
+      setIsLoading(false);
+      setIsError(true);
     }
   }
 

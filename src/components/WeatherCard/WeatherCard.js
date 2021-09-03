@@ -86,9 +86,6 @@ const StyledDaysBox = styled.div`
 
 export function WeatherCard({ locationInfo, weatherInfo, isDarkTheme }) {
   const { current, reducedDaily } = weatherInfo;
-  console.log(locationInfo, 'locationInfo')
-  console.log(weatherInfo, 'weatherInfo')
-  console.log(isDarkTheme, 'isDarkTheme')
 
   return (
     <StyledDiv>

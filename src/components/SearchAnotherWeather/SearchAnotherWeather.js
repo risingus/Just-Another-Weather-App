@@ -2,6 +2,7 @@ import { TestButton } from "../TestButton/TestButton";
 import { useState } from "react";
 import SearchIcon from "@material-ui/icons/Search";
 import styled from "styled-components";
+import PropTypes from "prop-types";
 
 const StyledSearch = styled.input`
   height: 2.1rem;
@@ -20,7 +21,6 @@ const StyledSearch = styled.input`
 
   :focus {
     outline: none !important;
-    border-bottom-color: ${({ theme }) => theme.input_border_focus};
   }
 `;
 
@@ -30,6 +30,7 @@ const StyledForm = styled.form`
 
 export function SearchAnotherWeather({ handleSearchLocation }) {
   const [search, setSearch] = useState("");
+
   return (
     <StyledForm onSubmit={(e) => handleSearchLocation(e, search)}>
       <StyledSearch type="text" placeholder="Try Fortaleza,br" onChange={(e) => setSearch(e.target.value)} value={search} />
@@ -40,3 +41,7 @@ export function SearchAnotherWeather({ handleSearchLocation }) {
     </StyledForm>
   );
 }
+
+SearchAnotherWeather.propTypes = {
+  handleSearchLocation: PropTypes.func.isRequired,
+};

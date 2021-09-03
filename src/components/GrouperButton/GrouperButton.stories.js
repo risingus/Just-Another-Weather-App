@@ -6,7 +6,7 @@ import { GrouperButton } from "./GrouperButton";
 import { TestButton } from "../TestButton/TestButton";
 
 export default {
-  title: "Box de botões",
+  title: "Button Box",
   component: GrouperButton,
 };
 

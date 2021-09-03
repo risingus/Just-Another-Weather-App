@@ -9,7 +9,7 @@ import { Grouper } from "./components/Grouper/Grouper";
 import { GrouperButton } from "./components/GrouperButton/GrouperButton.js";
 import { Loader } from "./components/Loader/Loader.js";
 import { weatherApi, localApi } from "./services/apis";
-import { WeatherInfo } from "./components/WeatherCard/WeatherCard.js";
+import { WeatherCard } from "./components/WeatherCard/WeatherCard.js";
 import { WeatherTitle } from "./components/WeatherTitle/WeatherTItle";
 import moment from "moment";
 import { translateWeekDays } from "./services/assistFunctions";
@@ -200,7 +200,7 @@ function App() {
 
           {showSearch && <SearchAnotherWeather handleSearchLocation={handleSearchLocation} />}
 
-          {showWeather && isLoading === false && <WeatherInfo weatherInfo={weatherInfo} locationInfo={locationInfo} isDarkTheme={isDarkTheme} />}
+          {showWeather && isLoading === false && <WeatherCard weatherInfo={weatherInfo} locationInfo={locationInfo} isDarkTheme={isDarkTheme} />}
         </WeatherDiv>
       </GlobalDiv>
 

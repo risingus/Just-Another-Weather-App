@@ -50,4 +50,5 @@ export function ErrorLocation({ isError, setIsError, errorMessage }) {
 ErrorLocation.propTypes = {
   isError: PropTypes.bool.isRequired,
   setIsError: PropTypes.func.isRequired,
+  errorMessage: PropTypes.string.isRequired
 };

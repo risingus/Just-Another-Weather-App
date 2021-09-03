@@ -6,7 +6,7 @@ import { ThemeProvider } from 'styled-components';
 import { TestButton } from './TestButton';
 
 export default {
-  title: 'Botão de teste',
+  title: 'TestButton',
   component: TestButton,
 };
 

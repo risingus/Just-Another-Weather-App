@@ -2,12 +2,14 @@ import styled from "styled-components";
 import day from "../../assets/imgs/day.jpg";
 import night from "../../assets/imgs/night.jpg";
 import { getDaysOfTheWeek } from "../../services/assistFunctions";
+import PropTypes from "prop-types";
 
 const StyledDiv = styled.div`
   display: flex;
   align-items: center;
   flex-direction: column;
   margin-bottom: 2rem;
+  width: 30rem;
 `;
 
 const StyledImg = styled.img`
@@ -82,8 +84,11 @@ const StyledDaysBox = styled.div`
   }
 `;
 
-export function WeatherInfo({ locationInfo, weatherInfo, isDarkTheme }) {
+export function WeatherCard({ locationInfo, weatherInfo, isDarkTheme }) {
   const { current, reducedDaily } = weatherInfo;
+  console.log(locationInfo, 'locationInfo')
+  console.log(weatherInfo, 'weatherInfo')
+  console.log(isDarkTheme, 'isDarkTheme')
 
   return (
     <StyledDiv>
@@ -110,3 +115,10 @@ export function WeatherInfo({ locationInfo, weatherInfo, isDarkTheme }) {
     </StyledDiv>
   );
 }
+
+
+WeatherCard.propTypes = {
+  locationInfo: PropTypes.node.isRequired,
+  weatherInfo: PropTypes.node.isRequired,
+  isDarkTheme: PropTypes.bool.isRequired
+};

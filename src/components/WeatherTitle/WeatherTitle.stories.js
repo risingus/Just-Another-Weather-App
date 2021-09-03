@@ -1,12 +1,12 @@
 import React from 'react';
-import {Title} from '../Title/Title.js'
+import { WeatherTitle } from './WeatherTItle';
 import { ThemeProvider } from 'styled-components';
 import { darkTheme, lightTheme } from '../../GlobalStyles/theme';
 import { GlobalStyle } from '../../GlobalStyles/globalTheme.js';
 
 export default {
-  title: 'Title Page',
-  component: Title,
+  title: 'Title H1',
+  component: WeatherTitle,
 };
 
 const Template = (args) => {
@@ -14,14 +14,14 @@ const Template = (args) => {
   return ( 
     <ThemeProvider theme={args.theme}>
       <GlobalStyle />
-      <Title {...args} />
+      <WeatherTitle {...args} />
     </ThemeProvider>
       
   )
 } 
 
-export const Default = Template.bind({});
-Default.args = {
+export const Light = Template.bind({});
+Light.args = {
   children: 'Seu título Aqui',
   theme: lightTheme
 };

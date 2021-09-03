@@ -1,4 +1,4 @@
-import { createGlobalStyle } from 'styled-components';
+import { createGlobalStyle } from "styled-components";
 
 export const GlobalStyle = createGlobalStyle`
 
@@ -8,6 +8,15 @@ export const GlobalStyle = createGlobalStyle`
         box-sizing: border-box;
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
+        ::-moz-selection {
+            color: ${({ theme }) => theme.text_selection_color};
+            background: ${({ theme }) => theme.text_selection_background};
+        }
+
+        ::selection {
+            color: ${({ theme }) => theme.text_selection_color};
+            background: ${({ theme }) => theme.text_selection_background};
+        }
 
     }
 
@@ -16,4 +25,3 @@ export const GlobalStyle = createGlobalStyle`
         font-family: 'Roboto Mono', sans-serif;
     }   
 `;
-

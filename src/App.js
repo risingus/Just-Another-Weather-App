@@ -155,7 +155,15 @@ function App() {
           setShowWeather(true);
         }, 1000);
       })
-      .catch(() => {
+      .catch((error) => {
+
+        if(error.response.data.cod === '404' && error.response.data.message === 'city not found') {
+          setErrorMessage("City not found");
+          setIsLoading(false);
+          setIsError(true);
+          return;
+        }
+
         setErrorMessage("Sorry, something went wrong");
         setIsLoading(false);
         setIsError(true);
@@ -171,9 +179,10 @@ function App() {
     justify-content: space-evenly;
     margin-top: 2rem;
 
-    @media (max-width: 840px) {
+    @media (max-width: 870px) {
       flex-direction: column;
       gap: 2rem;
+      align-items: center;
     }
   `;
 

@@ -14,6 +14,10 @@ const StyledH1 = styled.h1`
   -webkit-background-clip: text;
   color: transparent;
 
+  @media (max-width: 370px) {
+    font-size: 4rem;
+  }
+
   ::-moz-selection {
   color: ${({theme }) => theme.text_selection_color};
   background: ${({theme }) => theme.text_selection_background};

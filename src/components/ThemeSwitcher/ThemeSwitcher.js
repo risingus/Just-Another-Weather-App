@@ -33,7 +33,6 @@ const StyledSun = styled(Brightness5Icon)`
   }
 `;
 
-// eslint-disable-next-line react/prop-types
 export const SwitchButton = ({ isDarkTheme, onClick, $size }) => {
   return (
     <ThemeSwitcherButton onClick={onClick}>

@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 
 const StyledH1 = styled.h1`
   letter-spacing: .2rem;
-  font-size: 5rem;
+  font-size: 4rem;
   line-height: 6rem;
   text-align: center;
   width: min-content;

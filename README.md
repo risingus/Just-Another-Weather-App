@@ -25,10 +25,6 @@
 <li><a href="https://developer.mozilla.org/pt-BR/docs/Aprender/JavaScript">Javascript</a></li>
 <li><a href="https://www.techtudo.com.br/listas/2020/06/o-que-e-api-e-para-que-serve-cinco-perguntas-e-respostas.ghtml">API</a></li>
 
-<h1>See the project on the air 🚀</h1>
-<a href="https://just-another-web-app.vercel.app/">Just Another Weather App</a>
-
-
 <h1>Installation</h1>
 <p> 1. Clone the repository:</p>
 <code> git clone https://github.com/risingus/Storybook_test.git </code>
